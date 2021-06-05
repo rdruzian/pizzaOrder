@@ -1,0 +1,24 @@
+{
+  "order": {
+    "orderId": 0,
+    "customer": 0,
+    "flavor": [
+      {
+        "flavorId": 0,
+        "edge": "None",
+        "units": 1,
+        "details": "",
+        "price": 26.20
+      },
+      {
+      "flavorId": 2,
+      "edge": "None",
+      "units": 1,
+      "details": "",
+      "price": 26.20
+      }
+    ],
+    "dateTime": "05/06/2021 15:21:25",
+    "total": 63.58
+  }
+}

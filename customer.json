@@ -1,0 +1,16 @@
+{
+  "customer": [
+    {
+      "idCustomer": 0,
+      "name": "Renato Druzian",
+      "address": {
+        "type": 0,
+        "publicPalce": "Libia",
+        "number": 104,
+        "complement": ""
+      },
+      "order": [0],
+      "favorite": "Americana"
+    }
+  ]
+}

@@ -1,0 +1,22 @@
+{
+    "pizza": [
+      {
+        "pizzaId": 0,
+        "flavorName": "Portuguesa",
+        "ingredients": [],
+        "price": 26.90
+      },
+      {
+        "pizzaId": 0,
+        "flavorName": "Americana",
+        "ingredients": [],
+        "price": 26.90
+      },
+      {
+        "pizzaId": 0,
+        "flavorName": "Palmito",
+        "ingredients": [],
+        "price": 26.90
+      }
+    ]
+}
