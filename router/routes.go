@@ -7,4 +7,6 @@ import (
 
 func Init(){
 	http.HandleFunc("/", api.Home)
+	http.HandleFunc("/list", api.List)
+	http.HandleFunc("/addFlavor", api.AddFlavor)
 }
