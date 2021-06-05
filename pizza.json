@@ -3,18 +3,31 @@
     "pizzaId": 0,
     "flavorName": "Portuguesa",
     "ingredients": [],
-    "price": 26.90
+    "price": 26.9
   },
   {
     "pizzaId": 1,
     "flavorName": "Americana",
     "ingredients": [],
-    "price": 26.90
+    "price": 26.9
   },
   {
     "pizzaId": 2,
     "flavorName": "Palmito",
     "ingredients": [],
-    "price": 26.90
+    "price": 26.9
+  },
+  {
+    "pizzaId": 10,
+    "flavorName": "",
+    "ingredients": [
+      "Calabresa",
+      "Muçarela",
+      "Oregano",
+      "Azeitona",
+      "Molho de tomate",
+      " Cebola"
+    ],
+    "price": 26.84
   }
 ]
