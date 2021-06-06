@@ -9,7 +9,7 @@ func Init(){
 	http.HandleFunc("/", api.Home)
 	http.HandleFunc("/list", api.List)
 	http.HandleFunc("/addFlavor", api.AddFlavor)
-	http.HandleFunc("/newOrder", )
-	http.HandleFunc("/createUSer", )
-	http.HandleFunc("/login", )
+	http.HandleFunc("/newOrder", api.NewOrder)
+	http.HandleFunc("/createUSer", api.CreateUser)
+	http.HandleFunc("/login", api.Login)
 }

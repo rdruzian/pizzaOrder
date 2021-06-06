@@ -9,14 +9,14 @@ const (
 type Customer struct {
 	ID int64 `json:"idCustomer"`
 	Name string `json:"name"`
-	Address []address `json:"address"`
+	Address Address `json:"address"`
 	Orders []int64 `json:"order"`
 	Favorite string `json:"favorite"`
 	Login string `json:"login"`
 	Password string `json:"pass"`
 }
 
-type address struct {
+type Address struct {
 	Type int64 `json:"type"`
 	PublicPlace string `json:"publicPlace"`
 	Number int64 `json:"number"`
