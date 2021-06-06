@@ -10,7 +10,9 @@
         "complement": ""
       },
       "order": [0],
-      "favorite": "Americana"
+      "favorite": "Americana",
+      "login": "admin",
+      "pass": "admin"
     }
   ]
 }

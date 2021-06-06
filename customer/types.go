@@ -7,16 +7,18 @@ const (
 )
 
 type Customer struct {
-	ID int64 `json:'idCustomer'`
-	Name string `json:'name'`
-	Address []address `json:'address'`
-	Orders []int64 `json:'order'`
-	Favorite string `json:'favorite'`
+	ID int64 `json:"idCustomer"`
+	Name string `json:"name"`
+	Address []address `json:"address"`
+	Orders []int64 `json:"order"`
+	Favorite string `json:"favorite"`
+	Login string `json:"login"`
+	Password string `json:"pass"`
 }
 
 type address struct {
-	Type int64 `json:'type'`
-	PublicPlace string `json:'publicPlace'`
-	Number int64 `json:'number'`
-	Complement string `json:'complement'`
+	Type int64 `json:"type"`
+	PublicPlace string `json:"publicPlace"`
+	Number int64 `json:"number"`
+	Complement string `json:"complement"`
 }
