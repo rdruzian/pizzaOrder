@@ -1,6 +1,9 @@
 package order
 
-import "time"
+import (
+	"time"
+	_ "time"
+)
 
 const (
 	WaitingPayment = iota
@@ -9,7 +12,7 @@ const (
 	WaitingDelivery
 	Delivering
 	Deliveried
-
+)
 
 type Order struct {
 	Id int64 `json:"orderId"`

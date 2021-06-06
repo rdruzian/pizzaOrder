@@ -7,9 +7,10 @@ import (
 
 func CreateDataBase() error {
 	db := database.ConnDb(false)
-	_, err := db.Exec(`create database if not exists pizza`)
+	defer db.Close()
+	_, err := db.Exec(`create database pizza`)
 	if err != nil {
-		fmt.Println("Error to create database")
+		fmt.Println("Error to create database", err)
 		return err
 	}
 	fmt.Println("Database created susccessfully")
@@ -19,6 +20,7 @@ func CreateDataBase() error {
 
 func CreateCustomer() error {
 	db := database.ConnDb(true)
+	defer db.Close()
 	_, err := db.Exec(`create table if not exists customer(
 		customerId SERIAL not null primary key,
 		name varchar(150) not null,
@@ -27,7 +29,7 @@ func CreateCustomer() error {
 		pass varchar(25) not null
 	);`)
 	if err != nil {
-		fmt.Println("Error to create table customer")
+		fmt.Println("Error to create table customer", err)
 		return err
 	}
 	fmt.Println("Table customer created susccessfully!")
@@ -37,6 +39,7 @@ func CreateCustomer() error {
 
 func CreateAddress() error {
 	db := database.ConnDb(true)
+	defer db.Close()
 	_, err := db.Exec(`create table if not exists address(
 		  addressID SERIAL not null primary key,
 		  type varchar(15) not null,
@@ -45,7 +48,7 @@ func CreateAddress() error {
 		  complement varchar(100)
 	);`)
 	if err != nil {
-		fmt.Println("Error to create table address")
+		fmt.Println("Error to create table address", err)
 		return err
 	}
 	fmt.Println("Table address created susccessfully!")
@@ -55,7 +58,8 @@ func CreateAddress() error {
 
 func CreateOrder() error {
 	db := database.ConnDb(true)
-	_, err := db.Exec(`create table if not exists order(
+	defer db.Close()
+	_, err := db.Exec(`create table if not exists orders(
 		orderID SERIAL not null primary key,
 		customerID integer not null,
 		flavor integer not null,
@@ -68,7 +72,7 @@ func CreateOrder() error {
 		totalPrice decimal(5,2) not null
 	);`)
 	if err != nil {
-		fmt.Println("Error to create table order")
+		fmt.Println("Error to create table order", err)
 		return err
 	}
 	fmt.Println("Table order created susccessfully!")
@@ -78,13 +82,14 @@ func CreateOrder() error {
 
 func CreatePizza() error {
 	db := database.ConnDb(true)
+	defer db.Close()
 	_, err := db.Exec(`create table if not exists pizza(
 		pizzaID SERIAL not null primary key,
 		nameFlavor varchar(50) not null,
 		price decimal(4,2) not null
 	);`)
 	if err != nil {
-		fmt.Println("Error to create table pizza")
+		fmt.Println("Error to create table pizza", err)
 		return err
 	}
 	fmt.Println("Table pizza created susccessfully!")
@@ -94,12 +99,13 @@ func CreatePizza() error {
 
 func CreateCustomerAddress() error {
 	db := database.ConnDb(true)
+	defer db.Close()
 	_, err := db.Exec(`create table if not exists customerAddress(
 		customerID integer not null primary key references customer,
 		addressID integer not null references address
 	);`)
 	if err != nil {
-		fmt.Println("Error to create table customer/address")
+		fmt.Println("Error to create table customer/address", err)
 		return err
 	}
 	fmt.Println("Table customer/address created susccessfully!")
@@ -109,13 +115,14 @@ func CreateCustomerAddress() error {
 
 func CreateOrderCustomer() error {
 	db := database.ConnDb(true)
+	defer db.Close()
 	_, err := db.Exec(`create table if not exists orderCustomer(
 		cusotmerID integer not null primary key references customer,
-		orderID integer not null references order,
-		total decimal(5,2) not null references order
+		orderID integer not null references orders,
+		total decimal(5,2) not null
 	);`)
 	if err != nil {
-		fmt.Println("Error to create table customer/order")
+		fmt.Println("Error to create table customer/order", err)
 		return err
 	}
 	fmt.Println("Table customer/order created susccessfully!")
@@ -125,12 +132,13 @@ func CreateOrderCustomer() error {
 
 func CreateIngredients() error {
 	db := database.ConnDb(true)
+	defer db.Close()
 	_, err := db.Exec(`create table if not exists ingredients(
 		ingredientID SERIAL not null primary key,
 		pizzaID integer not null references pizza
 	);`)
 	if err != nil {
-		fmt.Println("Error to create table ingredients")
+		fmt.Println("Error to create table ingredients", err)
 		return err
 	}
 	fmt.Println("Table ingredients created susccessfully!")

@@ -25,7 +25,6 @@ func ConnDb(useDbName bool) *sql.DB {
 			panic(err)
 		}
 	}
-	defer db.Close()
 
 	fmt.Println("Successfully connected!")
 	return db

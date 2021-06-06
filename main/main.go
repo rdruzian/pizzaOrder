@@ -12,18 +12,13 @@ func main() {
 	// The routes initialization must be before initialize the web server
 	router.Init()
 
-	fmt.Println("Server is running on 9090 port!")
-	if err := http.ListenAndServe(":9090", nil); err != nil {
-		log.Fatal(err)
-	}
+	//err := sqlclient.CreateDataBase()
+	//if err != nil {
+	//	fmt.Println("Problem to create database")
+	//	return
+	//}
 
-	err := sqlclient.CreateDataBase()
-	if err != nil {
-		fmt.Println("Problem to create database")
-		return
-	}
-
-	err = sqlclient.CreateCustomer()
+	err := sqlclient.CreateCustomer()
 	if err != nil {
 		fmt.Println("Problem to create table")
 		return
@@ -63,5 +58,10 @@ func main() {
 	if err != nil {
 		fmt.Println("Problem to create table")
 		return
+	}
+
+	fmt.Println("Server is running on 9090 port!")
+	if err := http.ListenAndServe(":9090", nil); err != nil {
+		log.Fatal(err)
 	}
 }

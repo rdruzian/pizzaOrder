@@ -1,9 +1,9 @@
 package database
 
 const (
-	host     = "172.22.0.2"
+	host     = "172.23.0.2"
 	port     = 5432
-	user     = "root"
+	user     = "postgres"
 	password = "root"
 	dbname   = "pizza"
 )
