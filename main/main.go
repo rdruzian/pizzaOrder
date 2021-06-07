@@ -12,13 +12,13 @@ func main() {
 	// The routes initialization must be before initialize the web server
 	router.Init()
 
-	//err := sqlclient.CreateDataBase()
-	//if err != nil {
-	//	fmt.Println("Problem to create database")
-	//	return
-	//}
+	err := sqlclient.CreateDataBase()
+	if err != nil {
+		fmt.Println("Problem to create database")
+		return
+	}
 
-	err := sqlclient.CreateCustomer()
+	err = sqlclient.CreateCustomer()
 	if err != nil {
 		fmt.Println("Problem to create table")
 		return

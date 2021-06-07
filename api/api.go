@@ -8,6 +8,7 @@ import (
 	"os"
 	"pizzaOrder/api/types"
 	"pizzaOrder/customer"
+	"pizzaOrder/database/sqlclient"
 	"pizzaOrder/pizza"
 	"strconv"
 	"strings"
@@ -188,6 +189,11 @@ func newFlavor(id int64, name string, ingredients []string, price float64, menu 
 		fmt.Println("Error to write json file %v", err)
 		return err
 	}
+	err = sqlclient.SaveFlavor(pizzas)
+	if err != nil {
+		fmt.Println("Erro to save ondatabase")
+		return err
+	}
 
 	fmt.Println("Flavor added with success!")
 	return nil
@@ -226,6 +232,11 @@ func saveUser(user customer.Customer) error {
 	err = saveJson(types.User, u)
 	if err != nil {
 		fmt.Println("saveUser error to save file")
+	}
+	err = sqlclient.SaveCustomer(user)
+	if err != nil {
+		fmt.Println("saveUser Error to save on database %v", err)
+		return err
 	}
 
 	fmt.Println("User save succesfully!")

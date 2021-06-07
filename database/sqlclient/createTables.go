@@ -13,7 +13,7 @@ func CreateDataBase() error {
 		fmt.Println("Error to create database", err)
 		return err
 	}
-	fmt.Println("Database created susccessfully")
+	fmt.Println("Database created successfully")
 
 	return nil
 }
@@ -32,7 +32,7 @@ func CreateCustomer() error {
 		fmt.Println("Error to create table customer", err)
 		return err
 	}
-	fmt.Println("Table customer created susccessfully!")
+	fmt.Println("Table customer created successfully!")
 
 	return nil
 }
@@ -51,7 +51,7 @@ func CreateAddress() error {
 		fmt.Println("Error to create table address", err)
 		return err
 	}
-	fmt.Println("Table address created susccessfully!")
+	fmt.Println("Table address created successfully!")
 
 	return nil
 }
@@ -75,7 +75,7 @@ func CreateOrder() error {
 		fmt.Println("Error to create table order", err)
 		return err
 	}
-	fmt.Println("Table order created susccessfully!")
+	fmt.Println("Table order created successfully!")
 
 	return nil
 }
@@ -92,7 +92,7 @@ func CreatePizza() error {
 		fmt.Println("Error to create table pizza", err)
 		return err
 	}
-	fmt.Println("Table pizza created susccessfully!")
+	fmt.Println("Table pizza created successfully!")
 
 	return nil
 }
@@ -108,7 +108,7 @@ func CreateCustomerAddress() error {
 		fmt.Println("Error to create table customer/address", err)
 		return err
 	}
-	fmt.Println("Table customer/address created susccessfully!")
+	fmt.Println("Table customer/address created successfully!")
 
 	return nil
 }
@@ -125,7 +125,7 @@ func CreateOrderCustomer() error {
 		fmt.Println("Error to create table customer/order", err)
 		return err
 	}
-	fmt.Println("Table customer/order created susccessfully!")
+	fmt.Println("Table customer/order created successfully!")
 
 	return nil
 }
@@ -141,7 +141,7 @@ func CreateIngredients() error {
 		fmt.Println("Error to create table ingredients", err)
 		return err
 	}
-	fmt.Println("Table ingredients created susccessfully!")
+	fmt.Println("Table ingredients created successfully!")
 
 	return nil
 }
