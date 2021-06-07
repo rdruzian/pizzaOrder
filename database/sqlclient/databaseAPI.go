@@ -168,7 +168,40 @@ func SaveFlavor(flavor []pizza.Pizza) error {
 }
 
 // saveIngredients save the ingredients of the new flavor
-func saveIngredients(id int64, ingredients []string) error {}
+func saveIngredients(id int64, ingredients []string) error {
+	db := database.ConnDb(true)
+	defer db.Close()
+	for i := ingredients {
+		stmt, err := db.Prepare( `insert into ingredients (pizzaId) values (?)`)
+		if err != nil {
+			fmt.Println("Error to create save data on Customer table", err)
+			return err
+		}
+		defer stmt.Close()
+
+		stmtSelect, err := db.Prepare( `select ingredientID from ingredients where nameIngredients = ?`)
+		if err != nil {
+			fmt.Println("Error to create save data on Customer table", err)
+			return err
+		}
+		defer stmtSelect.Close()
+
+		res, err := stmtSelect.Exec(i)
+		if err != nil {
+			fmt.Println("Error to get the name of ingredient")
+			return err
+		}
+		_, err = stmt.Exec(res)
+		if err != nil {
+			fmt.Println("Error to get the name of ingredient")
+			return err
+		}
+	}
+
+	return nil
+}
 
 // SaveOrder registry the order on database
-func SaveOrder(client customer.Customer, orders order.Order) error {}
+func SaveOrder(client customer.Customer, orders order.Order) error {
+	return nil
+}

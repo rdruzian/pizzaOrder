@@ -135,6 +135,7 @@ func CreateIngredients() error {
 	defer db.Close()
 	_, err := db.Exec(`create table if not exists ingredients(
 		ingredientID SERIAL not null primary key,
+		nameIngredients varchar(50) not null,
 		pizzaID integer not null references pizza
 	);`)
 	if err != nil {
