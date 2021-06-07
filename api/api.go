@@ -97,10 +97,42 @@ func AddFlavor(w http.ResponseWriter, r *http.Request) {
 	if err = newFlavor(id, name, ingredient, price, menu); err != nil {
 		fmt.Println("Error to save a new flavor!")
 	}
+
+	err = sqlclient.SaveFlavor(pizzas)
 }
 
 // NewOrder receive the request for a new pizza order
-func NewOrder(w http.ResponseWriter, r *http.Request) {}
+func NewOrder(w http.ResponseWriter, r *http.Request) {
+	if r.Method != "POST" {
+		fmt.Println("Method not supported")
+		return
+	}
+
+	stringId := r.FormValue("id")
+	id, err := strconv.ParseInt(stringId, 10, 64)
+	if err != nil {
+		fmt.Println("Error to get ID value %v", err)
+		return
+	}
+
+	name := r.FormValue("flavorName")
+	ingredients := r.FormValue("ingredients")
+	ingredient := strings.Split(ingredients, ",")
+
+	stringPrice := r.FormValue("price")
+	price, err := strconv.ParseFloat(stringPrice,10)
+	if err != nil {
+		fmt.Println("Error to get PRICE value %v", err)
+		return
+	}
+	menu := loadJson(types.Flavor)
+
+	if err = newFlavor(id, name, ingredient, price, menu); err != nil {
+		fmt.Println("Error to save a new flavor!")
+	}
+
+	err = sqlclient.SaveFlavor(pizzas)
+}
 
 // CreateUser receive the request to add an user
 func CreateUser(w http.ResponseWriter, r *http.Request) {

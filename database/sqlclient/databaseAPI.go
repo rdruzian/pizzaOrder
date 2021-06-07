@@ -171,7 +171,7 @@ func SaveFlavor(flavor []pizza.Pizza) error {
 func saveIngredients(id int64, ingredients []string) error {
 	db := database.ConnDb(true)
 	defer db.Close()
-	for i := ingredients {
+	for i := range ingredients {
 		stmt, err := db.Prepare( `insert into ingredients (pizzaId) values (?)`)
 		if err != nil {
 			fmt.Println("Error to create save data on Customer table", err)
@@ -203,5 +203,6 @@ func saveIngredients(id int64, ingredients []string) error {
 
 // SaveOrder registry the order on database
 func SaveOrder(client customer.Customer, orders order.Order) error {
+
 	return nil
 }
