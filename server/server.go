@@ -3,7 +3,7 @@ package server
 import (
 	"github.com/gin-gonic/gin"
 	"log"
-	"restYT/routes"
+	"pizzaOrder/router"
 )
 
 type Server struct {
@@ -20,7 +20,7 @@ func NewServer() Server {
 }
 
 func (s *Server) Run() {
-	router := routes.ConfigRoutes(s.server)
+	router := router.ConfigRoutes(s.server)
 
 	log.Fatal(router.Run(":" + s.port))
 }
