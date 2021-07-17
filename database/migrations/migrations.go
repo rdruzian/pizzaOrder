@@ -12,4 +12,3 @@ func RunMigrations(db *gorm.DB) {
 	db.AutoMigrate(order.Order{})
 	db.AutoMigrate(pizza.Pizza{})
 }
-
