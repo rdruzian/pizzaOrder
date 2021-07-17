@@ -1,8 +1,8 @@
 package order
 
 import (
+	"gorm.io/gorm"
 	"time"
-	_ "time"
 )
 
 const (
@@ -15,12 +15,16 @@ const (
 )
 
 type Order struct {
-	Id int64 `json:"orderId"`
+	ID uint `json:"id" gorm:"primaryKey"`
 	CustomerID int64 `json:"customer"`
 	Flavor []flavor `json:"flavor"`
 	Date time.Time `json:"dateTime"`
 	TotalPrice float64 `json:"total"`
 	Status int64 `json:"status"`
+
+	CreateAt time.Time `json:"created"`
+	UpdateAt time.Time `json:"updated"`
+	DeletedAt gorm.DeletedAt `gorm:"index" json:"deleted"`
 }
 
 type flavor struct {

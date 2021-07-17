@@ -1,15 +1,32 @@
-package router
+package routes
 
 import (
-	"net/http"
-	"pizzaOrder/api"
+	"github.com/gin-gonic/gin"
+	"restYT/controllers"
 )
 
-func Init(){
-	http.HandleFunc("/", api.Home)
-	http.HandleFunc("/list", api.List)
-	http.HandleFunc("/addFlavor", api.AddFlavor)
-	http.HandleFunc("/newOrder", api.NewOrder)
-	http.HandleFunc("/createUSer", api.CreateUser)
-	http.HandleFunc("/login", api.Login)
+func ConfigRoutes(router *gin.Engine) *gin.Engine {
+	main := router.Group("api/v1")
+	{
+		pizza := main.Group("pizza")
+		{
+			pizza.GET("",)
+			pizza.GET("",)
+			pizza.GET("",)
+			pizza.GET("",)
+		}
+		order := main.Group("order")
+		{
+			order.GET("",)
+			order.GET("",)
+			order.GET("",)
+		}
+		customer := main.Group("customer")
+		{
+			customer.POST("/", controllers.CreateUser)
+			customer.POST("/login", controllers.Login)
+		}
+	}
+
+	return router
 }
