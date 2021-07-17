@@ -16,9 +16,6 @@ type Customer struct {
 	Name string `json:"name"`
 	Address Address `json:"address"`
 	Orders []int64 `json:"order"`
-	Favorite string `json:"favorite"`
-	Login string `json:"login"`
-	Password string `json:"pass"`
 
 	CreateAt time.Time `json:"created"`
 	UpdateAt time.Time `json:"updated"`
@@ -26,6 +23,8 @@ type Customer struct {
 }
 
 type Address struct {
+	ID uint `json:"id" gorm:"primaryKey"`
+	IDUser uint `json:"userID"`
 	Type int64 `json:"type"`
 	PublicPlace string `json:"publicPlace"`
 	Number int64 `json:"number"`
@@ -34,4 +33,11 @@ type Address struct {
 	CreateAt time.Time `json:"created"`
 	UpdateAt time.Time `json:"updated"`
 	DeletedAt gorm.DeletedAt `gorm:"index" json:"deleted"`
+}
+
+type LoginUser struct {
+	ID uint `json:"id" gorm:"primaryKey"`
+	IDUser uint `json:"userID"`
+	User string `json:"login"`
+	Password string `json:"password"`
 }
