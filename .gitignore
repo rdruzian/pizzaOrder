@@ -1,2 +1,4 @@
 .idea/
 frontPizza/node_modules/
+go.mod
+go.sum
