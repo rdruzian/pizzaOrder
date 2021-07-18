@@ -9,3 +9,7 @@ func History(c *gin.Context) {
 func LastOrder(c *gin.Context){
 
 }
+
+func NovoPedido(c *gin.Context){
+
+}
