@@ -17,7 +17,7 @@ const (
 type Order struct {
 	ID uint `json:"id" gorm:"primaryKey"`
 	CustomerID int64 `json:"customer"`
-	Flavor []flavor `json:"flavor"`
+	Flavor []Flavor `json:"flavor"`
 	Date time.Time `json:"dateTime"`
 	TotalPrice float64 `json:"total"`
 	Status int64 `json:"status"`
@@ -27,10 +27,10 @@ type Order struct {
 	DeletedAt gorm.DeletedAt `gorm:"index" json:"deleted"`
 }
 
-type flavor struct {
-	FlavorId int64 `json:"flavorId"`
+type Flavor struct {
+	FlavorId string `json:"flavorId"`
 	PizzaEdge string `json:"edge"`
-	Units int64 `json:"units"`
+	Units string `json:"units"`
 	Details string `json:"details"`
-	Price float64 `json:"price"`
+	Price string `json:"price"`
 }
