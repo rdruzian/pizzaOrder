@@ -38,6 +38,6 @@ type Address struct {
 type LoginUser struct {
 	ID uint `json:"id" gorm:"primaryKey"`
 	IDUser uint `json:"userID"`
-	User string `json:"login"`
+	User string `json:"Login"`
 	Password string `json:"password"`
 }

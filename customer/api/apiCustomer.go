@@ -32,7 +32,7 @@ func CreateCustomer(c *gin.Context) {
 	err = c.ShouldBindJSON(&userLogin)
 	if err != nil {
 		c.JSON(400, gin.H{
-			"error": "Não foi possível fazer o bind do JSON com dados do login: " + err.Error(),
+			"error": "Não foi possível fazer o bind do JSON com dados do Login: " + err.Error(),
 		})
 		return
 	}
@@ -60,7 +60,7 @@ func CreateCustomer(c *gin.Context) {
 	result = db.Create(&userLogin)
 	if result.Error != nil {
 		c.JSON(400, gin.H{
-			"error": "Não foi possível salvar o login do cliente",
+			"error": "Não foi possível salvar o Login do cliente",
 		})
 		return
 	}
@@ -83,7 +83,7 @@ func Login(c *gin.Context){
 	}
 
 	var user customer.LoginUser
-	dbError := db.Where("login = ?", user.User).First(&user).Error
+	dbError := db.Where("Login = ?", user.User).First(&user).Error
 	if dbError != nil {
 		c.JSON(400, gin.H{
 			"error": "Não foi possível encontrar usuário",

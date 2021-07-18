@@ -22,7 +22,7 @@ func History(c *gin.Context) {
 	err = db.Find(&pedidos).Where("customer=?", idUser).Error
 	if err != nil {
 		c.JSON(400, gin.H{
-			"error": "Não foi possível trazer o histórico de pedidos",
+			"error": "Não foi possível trazer o Histórico de Pedidos",
 		})
 	}
 

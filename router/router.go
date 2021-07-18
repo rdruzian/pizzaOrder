@@ -26,7 +26,7 @@ func ConfigRoutes(router *gin.Engine) *gin.Engine {
 		customer := main.Group("customer") // Tudo feito :)
 		{
 			customer.POST("/signin", Customer.CreateCustomer)
-			customer.POST("/login", Customer.Login)
+			customer.POST("/Login", Customer.Login)
 		}
 	}
 
