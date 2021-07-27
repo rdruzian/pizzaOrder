@@ -2,8 +2,8 @@ package main
 
 import (
 	"fmt"
-	"restYT/database"
-	"restYT/server"
+	"pizzaOrder/database"
+	"pizzaOrder/server"
 )
 
 func main() {

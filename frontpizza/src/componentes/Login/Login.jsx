@@ -42,7 +42,7 @@ class Login extends Component {
                 <div className="form-cadastro_button">
                     <button className="form-cadastro_input form-cadastro_submit">Login</button>
                     <button
-                        className="form-cadastro_input form-cadastro_cadastro" /*onSubmit={this._criarNota.bind(this)}*/>Cadastre-se
+                        className="form-cadastro_input form-cadastro_cadastro" onSubmit={() => this.props.history.push('/cadastro')}>Cadastre-se
                     </button>
                 </div>
             </form>

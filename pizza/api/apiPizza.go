@@ -1,6 +1,7 @@
 package api
 
 import (
+	"fmt"
 	"github.com/gin-gonic/gin"
 	"pizzaOrder/database"
 	Pizza "pizzaOrder/pizza"
@@ -10,12 +11,12 @@ import (
 
 func Menu(c *gin.Context) {
 	db := database.GetDatabase()
-	var pizzas []Pizza.Pizza
-	err := db.Find(&pizzas).Error
+	var pizzas Pizza.Pizza
+	result := db.Find(&pizzas)
 
-	if err != nil {
+	if result.Error != nil {
 		c.JSON(400, gin.H{
-			"error": "cannot find product by id: " + err.Error(),
+			"error": fmt.Sprintf("Não foi possível trazer o menu: %v", result.Error),
 		})
 		return
 	}
@@ -27,10 +28,13 @@ func NewFlavor(c *gin.Context) {
 	flavorName := c.Param("flavorName")
 	ingredientes := c.Param("ingredients")
 	preco := c.Param("price")
+	c.JSON(200, gin.H{
+		"message": fmt.Sprintf("Preço vindo do json: %v", preco),
+	})
 	precoFloat, err := strconv.ParseFloat(preco, 64)
 	if err != nil {
 		c.JSON(400, gin.H{
-			"eeror": "Preço precisa ser um valor numérico",
+			"error": fmt.Sprintf("Preço precisa ser um valor numérico: %v", err),
 		})
 	}
 
@@ -44,15 +48,8 @@ func NewFlavor(c *gin.Context) {
 	result := db.Create(&pizza)
 	if result.Error != nil {
 		c.JSON(400, gin.H{
-			"error": "Erro ao cria sua pizza",
+			"error": fmt.Sprintf("Erro ao criar sua pizza: %v", result.Error),
 		})
-	}
-
-	if err != nil {
-		c.JSON(400, gin.H{
-			"error": "cannot find product by id: " + err.Error(),
-		})
-		return
 	}
 
 	c.JSON(200, gin.H{

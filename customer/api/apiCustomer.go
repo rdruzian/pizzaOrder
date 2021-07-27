@@ -1,7 +1,9 @@
 package api
 
 import (
+	"fmt"
 	"github.com/gin-gonic/gin"
+	login "pizzaOrder/Login"
 	"pizzaOrder/auth"
 	"pizzaOrder/customer"
 	"pizzaOrder/database"
@@ -10,8 +12,6 @@ import (
 func CreateCustomer(c *gin.Context) {
 	db := database.GetDatabase()
 	var user customer.Customer
-	var userAddress customer.Address
-	var userLogin customer.LoginUser
 
 	err := c.ShouldBindJSON(&user)
 	if err != nil {
@@ -21,46 +21,12 @@ func CreateCustomer(c *gin.Context) {
 		return
 	}
 
-	err = c.ShouldBindJSON(&userAddress)
-	if err != nil {
-		c.JSON(400, gin.H{
-			"error": "Não foi possível fazer o bind do JSON de endereço: " + err.Error(),
-		})
-		return
-	}
+	user.Password = auth.SHA256Encoder(user.Password)
 
-	err = c.ShouldBindJSON(&userLogin)
-	if err != nil {
+	result := db.Create(&user).Error
+	if result != nil {
 		c.JSON(400, gin.H{
-			"error": "Não foi possível fazer o bind do JSON com dados do Login: " + err.Error(),
-		})
-		return
-	}
-
-	result := db.Create(&user)
-	if result.Error != nil {
-		c.JSON(400, gin.H{
-			"error": "Não foi possível salvar cliente",
-		})
-		return
-	}
-
-	userAddress.IDUser = user.ID
-	userLogin.IDUser = user.ID
-
-	result = db.Create(&userAddress)
-	if result.Error != nil {
-		c.JSON(400, gin.H{
-			"error": "Não foi possível salvar o endereço do cliente",
-		})
-		return
-	}
-
-	userLogin.Password = auth.SHA256Encoder(userLogin.Password)
-	result = db.Create(&userLogin)
-	if result.Error != nil {
-		c.JSON(400, gin.H{
-			"error": "Não foi possível salvar o Login do cliente",
+			"error": fmt.Sprintf("Não foi possível salvar o Login do cliente: %v", result),
 		})
 		return
 	}
@@ -72,18 +38,19 @@ func CreateCustomer(c *gin.Context) {
 
 func Login(c *gin.Context){
 	db := database.GetDatabase()
-	var l customer.LoginUser
 
-	err := c.ShouldBindJSON(&l)
+	var ld login.LoginData
+	var l customer.Customer
+
+	err := c.ShouldBindJSON(&ld)
 	if err != nil {
 		c.JSON(400, gin.H{
-			"error": "Não foi possível fazer o bind do JSON: " + err.Error(),
+			"error": fmt.Sprintf("Não foi possível pegar o json com dados de login %v", err),
 		})
 		return
 	}
 
-	var user customer.LoginUser
-	dbError := db.Where("Login = ?", user.User).First(&user).Error
+	dbError := db.Where("login = ?", ld.Login).First(&l).Error
 	if dbError != nil {
 		c.JSON(400, gin.H{
 			"error": "Não foi possível encontrar usuário",
@@ -91,14 +58,14 @@ func Login(c *gin.Context){
 		return
 	}
 
-	if user.Password != auth.SHA256Encoder(l.Password) {
+	if l.Password != auth.SHA256Encoder(ld.Senha) {
 		c.JSON(401, gin.H{
 			"error": "Senha inválida",
 		})
 		return
 	}
 
-	token, err := auth.NewJWTService().GeraToken(user.IDUser)
+	token, err := auth.NewJWTService().GeraToken(l.ID)
 	if err != nil {
 		c.JSON(500, gin.H{
 			"error": err.Error(),
