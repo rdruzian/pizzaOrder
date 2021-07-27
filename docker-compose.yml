@@ -7,7 +7,7 @@ services:
       context: .
       dockerfile: postgres.dockerfile
     image: github.com/hyperyuri/webapi-db
-    container_name: webapi-mvc-db
+    container_name: pizzaOrder
     restart: unless-stopped
     tty: true
     ports:
@@ -18,9 +18,9 @@ services:
       POSTGRES_PASSWORD: 123456
       PGDATA: /var/lib/postgresql/data/webapi-mvc
     volumes:
-      - webapi-mvc-db:/var/lib/postgresql/data
+      - pizzaOrderDB:/var/lib/postgresql/data
 
 volumes:
-  webapi-mvc-db:
+  pizzaOrderDB:
 
 # docker-compose up -d --build
